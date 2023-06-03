@@ -3,9 +3,10 @@ package main
 import (
 	"Files/data"
 	"fmt"
+	"time"
 )
 
-func main() {
+func main() { //main go routine
 
 	/*rootPath, _ := os.Getwd()
 	c, err := utils.ReadFileFromText((rootPath + "/data/text.txt"))
@@ -60,4 +61,37 @@ func main() {
 
 	things[2].(data.Workshop).SignUp()
 
+	//Call Go Routines
+	go printMessage("Go Routines")
+	go printMessage("Go Routines2")
+	printMessage("Main Routine")
+
+	//call Channels
+
+	var channel chan string
+	go testChannel("Channel 1", channel)
+
+	response := <-channel
+	fmt.Println(response)
+
+}
+
+////////////////////Go Routines ////////////////////////
+
+func printMessage(text string) {
+	for i := 0; i < 10; i++ {
+		fmt.Println(text+" ", i)
+		time.Sleep(1000 * time.Millisecond)
+	}
+}
+
+func testChannel(text string, channel chan string) {
+
+	for i := 0; i < 10; i++ {
+		fmt.Printf("Channel %v", text+" ", i)
+		time.Sleep(800 * time.Millisecond)
+	}
+
+	response := <-channel
+	fmt.Printf("Channel %v", response)
 }
